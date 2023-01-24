@@ -29,9 +29,11 @@ Which contains # of production and attraction trips
 	Zone.csv
 Updated: node.csv
 	Grid2demand	accessibility.csv (optional, however, it is needed if you preceding to next step, trip Distribution)
-![image](https://user-images.githubusercontent.com/117876335/214443163-bdb8cdec-9da7-426b-ab95-32becf88a516.png)
 
 3. Trip Distriputaion
 - Trip distribution classification is considered.
 	. Classification of trip distribution
-		- 	internal > internal 
+		- internal > internal 
+		- internal > external
+		- external > internal
+		- external > external 
