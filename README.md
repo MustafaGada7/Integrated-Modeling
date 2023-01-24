@@ -14,7 +14,7 @@ map.osm 	OSM2GMNS (Python package)	link.csv
 2. Trip Generation
 - Generate the number of production and attraction trips for each trip purpose (HBw, HBO, and NHB) >> person trips per day.
 - Method: grid2demand https://github.com/asu-trans-ai-lab/grid2demand
-	Process 	Input file	Method	Output
+	Steps	Process 	Input file	Method	Output
 1	- Zone generation.
 - Partition network into grid cells	poi.csv
 link.csv
@@ -29,6 +29,7 @@ Which contains # of production and attraction trips
 	Zone.csv
 Updated: node.csv
 	Grid2demand	accessibility.csv (optional, however, it is needed if you preceding to next step, trip Distribution)
+![image](https://user-images.githubusercontent.com/117876335/214445478-f0766d94-4633-4179-8fe3-6c1db411bfa8.png)
 
 3. Trip Distriputaion
 - Trip distribution classification is considered.
