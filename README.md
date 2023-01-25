@@ -4,31 +4,12 @@ In this repository, multiple free programing tools will be integrated to summari
 1. Subarea Analysis
 - Creating General Multi model specifications (GMNS) format network for the area and specify point of intrests (POIs).
 - Metohd: osm2gmns https://osm2gmns.readthedocs.io/en/latest/
-Step	Process	Input file	Method	Output
-1	Network files preparation	map.osm (from OpenStreetMap)	OSM2GMNS (Python package)	link.csv
-				node.csv
-				poi.csv
-![image](https://user-images.githubusercontent.com/117876335/214445873-51ce8409-f594-412b-8aad-aedcc697f6a3.png)
+<img width="502" alt="Screenshot 2023-01-24 at 8 36 57 PM" src="https://user-images.githubusercontent.com/117876335/214474562-b9f9de6f-5c69-4033-8dbf-2bfd99c5779f.png">
 
 2. Trip Generation
 - Generate the number of production and attraction trips (the number of trips entering and leaving each zone)for each trip purpose (HBw, HBO, and NHB) >> person trips per day.
 - Method: grid2demand https://github.com/asu-trans-ai-lab/grid2demand
-	Steps	Process 	Input file	Method	Output
-1	- Zone generation.
-- Partition network into grid cells	poi.csv
-link.csv
-node.csv	Grid2demand	Zone.csv
-2	- production/attraction rates of each land use ((optional))	poi.csv, trip purpose set as 1	Grid2demand	poi_trip_rate.csv
-3	- production/attraction value of each node according to POI type	poi.csv 
-or
-poi_trip_rate.csv	Grid2demand	Updated: node.csv
-Which contains # of production and attraction trips
-4	- zone-to-zone accessibility matrix.
-- Change the latitude of the area of interest (optional). Default value asigned
-	Zone.csv
-Updated: node.csv
-	Grid2demand	accessibility.csv (optional, however, it is needed if you preceding to next step, trip Distribution)
-![image](https://user-images.githubusercontent.com/117876335/214445478-f0766d94-4633-4179-8fe3-6c1db411bfa8.png)
+<img width="487" alt="Screenshot 2023-01-24 at 8 38 46 PM" src="https://user-images.githubusercontent.com/117876335/214474747-505ea644-5021-42e2-af5a-01347f42695a.png">
 
 3. Trip Distriputaion
 - Estimate the number of trips made between each zone.
@@ -39,12 +20,7 @@ Updated: node.csv
 		- external > internal
 		- external > external 
 - Method: grid2demand https://github.com/asu-trans-ai-lab/grid2demand
-Step	Process	Input file	Method	Output
-1	Apply gravity model to perform trip distribution	zone.csv 
-od_accessibility.csv
-	Grid2demand (Python package)	demend.csv
-	Generate agent-based demand	demend.csv	Grid2demand 	input_agent.csv
-![image](https://user-images.githubusercontent.com/117876335/214452374-316789be-ba1e-4eb6-89c2-4501f8cb474f.png)
+<img width="471" alt="Screenshot 2023-01-24 at 8 41 01 PM" src="https://user-images.githubusercontent.com/117876335/214474993-d92fdc1f-84ce-472e-918f-7c4f99b464bd.png">
 
 4. Traffic Assignment
 - Path4GMNS supports, in short,
@@ -54,22 +30,7 @@ od_accessibility.csv
 	. evaluating multimodal accessibility and equity,
 	. synthesizing zones and Origin-Destination (OD) demand for a given network.
 - Method: path4gmns https://path4gmns.readthedocs.io/en/latest/
-Steps	Process 	Input file	Method	Output
-1	-Finding (static) shortest path between two nodes,	node.csv
-link.csv
-demand.csv
-settings.yml (for multimodal analyses)
-	Path4gmns (Python package)	agent.csv
-2		node.csv
-link.csv
-demand.csv
-settings.csv (for DTALite)
-	DTALite (C++ package)	link_performence.csv
-(volume, v/c, Speed, travel time)
-route_assignment.csv
-(OD pair, path volume)
-
-![image](https://user-images.githubusercontent.com/117876335/214459961-653925b5-04b1-4486-aac8-3880a1fa1dad.png)
+<img width="492" alt="Screenshot 2023-01-24 at 8 49 55 PM" src="https://user-images.githubusercontent.com/117876335/214475798-6d9718e5-501d-48a0-b748-528de1c7cce4.png">
 
 Flowchart shows the different 4-steps small&mid-sized city planning:
 
