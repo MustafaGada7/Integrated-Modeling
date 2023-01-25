@@ -2,17 +2,16 @@
 In this repository, multiple free programing tools will be integrated to summarize and demonstrate the 4 steps of small and mid-sized city planning.
 
 1. Subarea Analysis
-- Creating General Multi model specifications (GMNS) format network for the area and specify point of intrests (POIs)
+- Creating General Multi model specifications (GMNS) format network for the area and specify point of intrests (POIs).
 - Metohd: osm2gmns https://osm2gmns.readthedocs.io/en/latest/
-Input file	Method	Output
-map.osm 	OSM2GMNS (Python package)	link.csv
-		node.csv
-		poi.csv
-![image](https://user-images.githubusercontent.com/117876335/214426778-19e83a89-edc0-4e4d-8a2c-d24914073531.png)
-- Visualization: NeXTA https://github.com/asu-trans-ai-lab/NeXTA4GMNS or QGIS https://qgis.org/en/site/
+Step	Process	Input file	Method	Output
+1	Network files preparation	map.osm (from OpenStreetMap)	OSM2GMNS (Python package)	link.csv
+				node.csv
+				poi.csv
+![image](https://user-images.githubusercontent.com/117876335/214445873-51ce8409-f594-412b-8aad-aedcc697f6a3.png)
 
 2. Trip Generation
-- Generate the number of production and attraction trips for each trip purpose (HBw, HBO, and NHB) >> person trips per day.
+- Generate the number of production and attraction trips (the number of trips entering and leaving each zone)for each trip purpose (HBw, HBO, and NHB) >> person trips per day.
 - Method: grid2demand https://github.com/asu-trans-ai-lab/grid2demand
 	Steps	Process 	Input file	Method	Output
 1	- Zone generation.
@@ -32,9 +31,44 @@ Updated: node.csv
 ![image](https://user-images.githubusercontent.com/117876335/214445478-f0766d94-4633-4179-8fe3-6c1db411bfa8.png)
 
 3. Trip Distriputaion
+- Estimate the number of trips made between each zone.
 - Trip distribution classification is considered.
 	. Classification of trip distribution
 		- internal > internal 
 		- internal > external
 		- external > internal
 		- external > external 
+- Method: grid2demand https://github.com/asu-trans-ai-lab/grid2demand
+Step	Process	Input file	Method	Output
+1	Apply gravity model to perform trip distribution	zone.csv 
+od_accessibility.csv
+	Grid2demand (Python package)	demend.csv
+	Generate agent-based demand	demend.csv	Grid2demand 	input_agent.csv
+![image](https://user-images.githubusercontent.com/117876335/214452374-316789be-ba1e-4eb6-89c2-4501f8cb474f.png)
+
+4. Traffic Assignment
+- Path4GMNS supports, in short,
+	. finding (static) shortest path between two nodes,
+	. constructing shortest paths for all individual agents,
+	. performing path-based User-Equilibrium (UE) traffic assignment,
+	. evaluating multimodal accessibility and equity,
+	. synthesizing zones and Origin-Destination (OD) demand for a given network.
+- Method: path4gmns https://path4gmns.readthedocs.io/en/latest/
+Steps	Process 	Input file	Method	Output
+1	-Finding (static) shortest path between two nodes,	node.csv
+link.csv
+demand.csv
+settings.yml (for multimodal analyses)
+	Path4gmns (Python package)	agent.csv
+2		node.csv
+link.csv
+demand.csv
+settings.csv (for DTALite)
+	DTALite (C++ package)	link_performence.csv
+(volume, v/c, Speed, travel time)
+route_assignment.csv
+(OD pair, path volume)
+
+![image](https://user-images.githubusercontent.com/117876335/214459961-653925b5-04b1-4486-aac8-3880a1fa1dad.png)
+
+Flowchart:
