@@ -71,4 +71,6 @@ route_assignment.csv
 
 ![image](https://user-images.githubusercontent.com/117876335/214459961-653925b5-04b1-4486-aac8-3880a1fa1dad.png)
 
-Flowchart:
+Flowchart shows the different 4-steps small&mid-sized city planning:
+
+![4-steps_mid-sized_city_planning_v2](https://user-images.githubusercontent.com/117876335/214474319-9848913d-c704-41a8-b91a-e555f5ee957b.jpeg)
